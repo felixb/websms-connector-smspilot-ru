@@ -28,6 +28,7 @@ import android.preference.PreferenceManager;
 import de.ub0r.android.websms.connector.common.BasicConnector;
 import de.ub0r.android.websms.connector.common.ConnectorCommand;
 import de.ub0r.android.websms.connector.common.ConnectorSpec;
+import de.ub0r.android.websms.connector.common.Log;
 import de.ub0r.android.websms.connector.common.Utils;
 import de.ub0r.android.websms.connector.common.WebSMSException;
 
@@ -42,6 +43,12 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 
 	/** SMSpilotRu Gateway URL. */
 	private static final String URL = "https://smspilot.ru/api.php";
+
+	/**
+	 * The current fingerprints of the SSL-certificate used by the https-sites.
+	 */
+	private static final String[] SSL_FINGERPRINTS = //
+	{ "c0:9c:3e:7e:32:d8:06:3e:f6:b1:47:b2:e3:61:71:a4:df:c7:44:fb" };
 
 	/**
 	 * {@inheritDoc}
@@ -79,6 +86,14 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 			connectorSpec.setStatus(ConnectorSpec.STATUS_INACTIVE);
 		}
 		return connectorSpec;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	protected String[] trustedSSLCerts() {
+		return SSL_FINGERPRINTS;
 	}
 
 	/**
@@ -146,8 +161,17 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 	 */
 	@Override
 	protected String getRecipients(final ConnectorCommand command) {
-		return Utils.joinRecipientsNumbers(Utils.national2international(command
-				.getDefPrefix(), command.getRecipients()), ";", true);
+		final String[] rec = Utils.national2international(command
+				.getDefPrefix(), command.getRecipients());
+		if (rec[0].startsWith("+")) {
+			rec[0] = rec[0].substring(1);
+		} else if (rec[0].startsWith("00")) {
+			rec[0] = rec[0].substring(2);
+		}
+		if (rec == null || rec.length == 0) {
+			return null;
+		}
+		return rec[0];
 	}
 
 	/**
@@ -208,6 +232,7 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 		if (htmlText == null || htmlText.length() == 0) {
 			throw new WebSMSException(context, R.string.error_service);
 		}
+		Log.d(TAG, "out: " + htmlText);
 		String[] lines = htmlText.split("\n");
 		int l = lines.length;
 		if (l == 0) {
@@ -215,7 +240,7 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 		} else if (lines[0].startsWith("SUCCESS")) {
 			// cs.setBalance(lines[l - 1].trim());
 		} else {
-			throw new WebSMSException(context, R.string.error, lines[0]);
+			throw new WebSMSException(lines[0]);
 		}
 	}
 }
