@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
         <!--
-                Copyright (C) 2010 Felix Bechstein
+		Copyright (C) 2009-2010 Felix Bechstein
         -->
         <!--
                 This file is part of WebSMS. This program is free software; you can
@@ -17,8 +17,10 @@
                 not, see <http://www.gnu.org/licenses/>.
         -->
 <resources>
-	<string name="connector_smspilot_preferences">Einstellungen - smspilot.ru</string>
-	<string name="enable_smspilot">Aktiviere smspilot.ru</string>
+	<string name="connector_smspilot_author">Felix Bechstein &lt;f@ub0r.de&gt;</string>
+	<string name="connector_smspilot_name">SMSpilot.ru</string>
+	<string name="connector_smspilot_preferences">Настройки - smspilot.ru</string>
+	<string name="enable_smspilot">Включить smspilot.ru</string>
 	<string name="apikey_">API Key</string>
-	<string name="apikey_hint">Dein API Key</string>
+	<string name="apikey_hint">Ваш API Key</string>
 </resources>
