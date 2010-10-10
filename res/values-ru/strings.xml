@@ -17,10 +17,10 @@
                 not, see <http://www.gnu.org/licenses/>.
         -->
 <resources>
-<!--	<string name="connector_smspilot_author">Felix Bechstein &lt;f@ub0r.de&gt;</string> -->
-<!--	<string name="connector_smspilot_name">smspilot.ru</string> -->
-<!--	<string name="connector_smspilot_preferences">Preferences - smspilot.ru</string> -->
-<!--	<string name="enable_smspilot">Enable smspilot.ru</string> -->
-<!--	<string name="apikey_">API Key</string> -->
-<!--	<string name="apikey_hint">Your API Key</string> -->
+	<string name="connector_smspilot_author">Felix Bechstein &lt;f@ub0r.de&gt;</string>
+	<string name="connector_smspilot_name">SMSpilot.ru</string>
+	<string name="connector_smspilot_preferences">Настройки - smspilot.ru</string>
+	<string name="enable_smspilot">Включить smspilot.ru</string>
+	<string name="apikey_">API Key</string>
+	<string name="apikey_hint">Ваш API Key</string>
 </resources>
