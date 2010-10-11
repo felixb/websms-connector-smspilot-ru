@@ -23,6 +23,8 @@
 	<EditTextPreference android:key="username_smspilot"
 		android:title="@string/apikey_" android:summary="@string/apikey_hint"
 		android:dependency="enable_smspilot" />
+	<CheckBoxPreference android:key="hide_apistatus"
+		android:title="@string/hide_api_status_" android:dependency="enable_smspilot" />
 	<CheckBoxPreference android:key="use_default_sender"
 		android:defaultValue="true" android:title="@string/use_derfault_sender_"
 		android:summary="@string/use_derfault_sender_hint"

@@ -31,6 +31,8 @@ public final class Preferences extends PreferenceActivity {
 	static final String PREFS_ENABLED = "enable_smspilot";
 	/** Preference's name: user's api key. */
 	static final String PREFS_APIKEY = "username_smspilot";
+	/** Preference's name: hide api status. */
+	static final String PREFS_HIDE_APISTATUS = "hide_apistatus";
 
 	/**
 	 * {@inheritDoc}

@@ -238,7 +238,17 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 		if (l == 0) {
 			throw new WebSMSException(context, R.string.error_service);
 		} else if (lines[0].startsWith("SUCCESS")) {
-			cs.setBalance(lines[0].replaceAll(".* ", ""));
+			String balance = lines[0].replaceAll(".* ", "");
+			if (!PreferenceManager.getDefaultSharedPreferences(context)
+					.getBoolean(Preferences.PREFS_HIDE_APISTATUS, false)) {
+				for (int i = 1; i < l; i++) {
+					if (lines[i].startsWith("status")) {
+						balance += " API" + lines[i];
+						break;
+					}
+				}
+			}
+			cs.setBalance(balance);
 		} else {
 			throw new WebSMSException(lines[0]);
 		}

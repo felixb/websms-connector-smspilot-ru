@@ -25,4 +25,5 @@
 	<string name="enable_smspilot">Enable smspilot.ru</string>
 	<string name="apikey_">API Key</string>
 	<string name="apikey_hint">Your API Key</string>
+	<string name="hide_api_status_">Hide API status</string>
 </resources>
