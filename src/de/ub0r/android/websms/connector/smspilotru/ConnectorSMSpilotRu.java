@@ -48,8 +48,9 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 	/**
 	 * The current fingerprints of the SSL-certificate used by the https-sites.
 	 */
-	private static final String[] SSL_FINGERPRINTS = //
-	{ "c0:9c:3e:7e:32:d8:06:3e:f6:b1:47:b2:e3:61:71:a4:df:c7:44:fb" };
+	private static final String[] SSL_FINGERPRINTS = { // .
+	"8d:de:0a:23:b4:fc:a4:d4:3e:90:1f:53:bb:47:e5:0a:ee:98:50:e4",
+			"c0:9c:3e:7e:32:d8:06:3e:f6:b1:47:b2:e3:61:71:a4:df:c7:44:fb" };
 
 	/**
 	 * {@inheritDoc}
