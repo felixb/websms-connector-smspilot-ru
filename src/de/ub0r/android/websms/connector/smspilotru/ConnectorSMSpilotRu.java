@@ -31,6 +31,7 @@ import de.ub0r.android.websms.connector.common.ConnectorSpec;
 import de.ub0r.android.websms.connector.common.Log;
 import de.ub0r.android.websms.connector.common.Utils;
 import de.ub0r.android.websms.connector.common.WebSMSException;
+import de.ub0r.android.websms.connector.common.ConnectorSpec.SubConnectorSpec;
 
 /**
  * AsyncTask to manage IO to smspilot.ru API.
@@ -63,8 +64,8 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 		c.setCapabilities(ConnectorSpec.CAPABILITIES_UPDATE
 				| ConnectorSpec.CAPABILITIES_SEND
 				| ConnectorSpec.CAPABILITIES_PREFS);
-		c.addSubConnector("smspilot.ru", name, 0);
-		// TODO: SubConnectorSpec.FEATURE_CUSTOMSENDER);
+		c.addSubConnector("smspilot.ru", name,
+				SubConnectorSpec.FEATURE_CUSTOMSENDER);
 		return c;
 	}
 
@@ -180,13 +181,15 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 	@Override
 	protected String getSender(final Context context,
 			final ConnectorCommand command, final ConnectorSpec cs) {
-		// TODO: let user set sender
-		final String s = Utils.international2oldformat(Utils.getSender(context,
-				command.getDefSender()));
-		if (s.startsWith("00")) {
-			return s.substring(2);
+		String sender = command.getCustomSender();
+		if (sender == null || sender.length() > 0) {
+			sender = Utils.international2oldformat(Utils.getSender(context,
+					command.getDefSender()));
+			if (sender.startsWith("00")) {
+				return sender.substring(2);
+			}
 		}
-		return s;
+		return sender;
 	}
 
 	/**
