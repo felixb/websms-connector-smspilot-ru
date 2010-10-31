@@ -214,8 +214,7 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 	 */
 	@Override
 	protected boolean usePost() {
-		// TODO: change me
-		return false;
+		return true;
 	}
 
 	/**
@@ -242,7 +241,13 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 		if (l == 0) {
 			throw new WebSMSException(context, R.string.error_service);
 		} else if (lines[0].startsWith("SUCCESS")) {
-			String balance = lines[0].replaceAll(".* ", "");
+			String balance = "";
+			for (int i = 1; i < l; i++) {
+				if (lines[i].startsWith("balance")) {
+					balance += lines[i].replaceAll(".*=", "");
+					break;
+				}
+			}
 			if (!PreferenceManager.getDefaultSharedPreferences(context)
 					.getBoolean(Preferences.PREFS_HIDE_APISTATUS, false)) {
 				for (int i = 1; i < l; i++) {
@@ -252,7 +257,9 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 					}
 				}
 			}
-			cs.setBalance(balance);
+			if (balance.trim().length() > 0) {
+				cs.setBalance(balance);
+			}
 		} else {
 			throw new WebSMSException(lines[0]);
 		}
