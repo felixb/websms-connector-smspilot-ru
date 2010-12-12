@@ -50,7 +50,8 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 	 */
 	private static final String[] SSL_FINGERPRINTS = { // .
 	"8d:de:0a:23:b4:fc:a4:d4:3e:90:1f:53:bb:47:e5:0a:ee:98:50:e4",
-			"c0:9c:3e:7e:32:d8:06:3e:f6:b1:47:b2:e3:61:71:a4:df:c7:44:fb" };
+			"c0:9c:3e:7e:32:d8:06:3e:f6:b1:47:b2:e3:61:71:a4:df:c7:44:fb",
+			"a6:dd:f1:78:d7:27:14:0c:66:2b:d5:2e:ac:7a:b3:0a:76:94:07:58" };
 
 	/**
 	 * {@inheritDoc}
