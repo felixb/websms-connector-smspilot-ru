@@ -18,7 +18,7 @@
 	-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="de.ub0r.android.websms.connector.smspilotru"
-	android:versionName="1.2" android:versionCode="1507">
+	android:versionName="1.3" android:versionCode="1508">
 	<application android:label="@string/app_name" android:icon="@drawable/icon">
 
 		<!--
