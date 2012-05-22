@@ -28,10 +28,10 @@ import android.preference.PreferenceManager;
 import de.ub0r.android.websms.connector.common.BasicConnector;
 import de.ub0r.android.websms.connector.common.ConnectorCommand;
 import de.ub0r.android.websms.connector.common.ConnectorSpec;
+import de.ub0r.android.websms.connector.common.ConnectorSpec.SubConnectorSpec;
 import de.ub0r.android.websms.connector.common.Log;
 import de.ub0r.android.websms.connector.common.Utils;
 import de.ub0r.android.websms.connector.common.WebSMSException;
-import de.ub0r.android.websms.connector.common.ConnectorSpec.SubConnectorSpec;
 
 /**
  * AsyncTask to manage IO to smspilot.ru API.
@@ -46,12 +46,6 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 	private static final String URL = "https://smspilot.ru/api.php";
 
 	/**
-	 * The current fingerprints of the SSL-certificate used by the https-sites.
-	 */
-	private static final String[] SSL_FINGERPRINTS = { // .
-	"17:38:dd:6b:28:bc:69:aa:84:37:65:f4:e1:27:46:66:17:91:a7:6b" };
-
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -59,7 +53,7 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 		final String name = context.getString(R.string.connector_smspilot_name);
 		ConnectorSpec c = new ConnectorSpec(name);
 		c.setAuthor(// .
-				context.getString(R.string.connector_smspilot_author));
+		context.getString(R.string.connector_smspilot_author));
 		c.setBalance(null);
 		c.setCapabilities(ConnectorSpec.CAPABILITIES_UPDATE
 				| ConnectorSpec.CAPABILITIES_SEND
@@ -89,12 +83,9 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 		return connectorSpec;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
-	protected String[] trustedSSLCerts() {
-		return SSL_FINGERPRINTS;
+	protected boolean trustAllSLLCerts() {
+		return true;
 	}
 
 	/**
@@ -162,8 +153,8 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 	 */
 	@Override
 	protected String getRecipients(final ConnectorCommand command) {
-		final String[] rec = Utils.national2international(command
-				.getDefPrefix(), command.getRecipients());
+		final String[] rec = Utils.national2international(
+				command.getDefPrefix(), command.getRecipients());
 		if (rec[0].startsWith("+")) {
 			rec[0] = rec[0].substring(1);
 		} else if (rec[0].startsWith("00")) {
@@ -212,7 +203,7 @@ public final class ConnectorSMSpilotRu extends BasicConnector {
 	 * {@inheritDoc}
 	 */
 	@Override
-	protected boolean usePost() {
+	protected boolean usePost(final ConnectorCommand command) {
 		return true;
 	}
 
